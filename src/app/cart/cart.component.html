@@ -30,20 +30,15 @@
                         </thead>
                         <tbody>
                             <tr class="text-center" *ngFor=" let item of cartList">
-                                <td class="product-remove"><a href="javascript:void(0)"
-                                        (click)="deleteProduct(item.id)"><span class="ion-ios-close"></span></a></td>
-
+                                <td class="product-remove"><a href="javascript:void(0)" (click)="deleteProduct(item.id)"><span class="ion-ios-close"></span></a></td>
                                 <td class="image-prod">
                                     <div class="img" [style.background-image]="'url(' + item.image + ')'"></div>
                                 </td>
-
                                 <td class="product-name">
                                     <h3>{{item.name}}</h3>
                                     <p>Far far away, behind the word mountains, far from the countries</p>
                                 </td>
-
                                 <td class="price">{{item.price}}</td>
-
                                 <td class="quantity">
                                     <div class="input-group mb-3">
                                         <input type="text" name="quantity" #todo
@@ -51,7 +46,6 @@
                                             max="100" (change)="changeQuantity(item, $event) ">
                                     </div>
                                 </td>
-
                                 <td class="total">{{item.price * item.quantity}} $</td>
                             </tr>
                         </tbody>
