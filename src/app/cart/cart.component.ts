@@ -29,7 +29,7 @@ export class CartComponent implements OnInit {
     // this.store.pipe(select(EventSelector.getEventInfo)).subscribe((eventInfo: EventInfo) => {
     // });
   }
-  deleteProduct(id, value) {
+  deleteProduct(id) {
     console.log('id', id);
     this.store.dispatch(new MainActions.MainActionDeleteProduct(id));
   }
