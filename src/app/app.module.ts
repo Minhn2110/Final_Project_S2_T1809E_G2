@@ -18,12 +18,14 @@ import { NgsRevealModule } from 'ngx-scrollreveal';
 import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './reducers';
 import { mainReducer } from './state/main.reducer';
+import { CartComponent } from './cart/cart.component';
 
 @NgModule({
   declarations: [
     MainComponent,
     layout,
     HomeComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,

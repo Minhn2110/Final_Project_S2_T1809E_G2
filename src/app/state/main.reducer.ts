@@ -1,15 +1,20 @@
 import { MainActionTypes , MainActions } from './main.action';
-export const initialState: any = {
-    cart: []
-}
+import { productAdapter, initialState } from '../model';
+// export const initialState: any = {
+//     cart: []
+// }
 
 export function mainReducer(state = initialState, action: MainActions) {
     switch (action.type) {
-        case MainActionTypes.MainActionAddProduct:
-            return {
-                ...state,
-                cart: [...state.cart, action.payload]
-            }
+            case MainActionTypes.MainActionCreateProduct:
+                return productAdapter.addOne(action.product, state);
+            case MainActionTypes.MainActionUpdateProduct:
+                    return productAdapter.updateOne({
+                        id: action.id,
+                        changes: action.changes,
+                    }, state);
+            case MainActionTypes.MainActionDeleteProduct:
+                return productAdapter.removeOne(action.id, state)
         default:
             return state;
     }

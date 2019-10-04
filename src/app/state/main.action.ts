@@ -1,9 +1,14 @@
 import { Action } from '@ngrx/store';
+import { Product } from '../model';
 
 export enum MainActionTypes{
     MainActionAddProduct = '[MainAction] Add Product',
     MainActionAddProductSuccess = '[MainAction] Add Product Success',
     MainActionAddProductFailed = '[MainAction] Add Product Failed',
+
+    MainActionCreateProduct = '[MainAction] Create Product',
+    MainActionUpdateProduct = '[MainAction] Update Product',
+    MainActionDeleteProduct = '[MainAction] Delete Product'
 }
 
 export class MainActionAddProduct implements Action {
@@ -21,7 +26,25 @@ export class MainActionAddProductFailed implements Action {
     constructor(public payload: any) {}
 }
 
+export class MainActionUpdateProduct implements Action {
+    readonly type = MainActionTypes.MainActionUpdateProduct;
+    constructor(public id: number, public changes: Partial<Product>) {}
+}
+
+export class MainActionCreateProduct implements Action {
+    readonly type = MainActionTypes.MainActionCreateProduct;
+    constructor(public product: Product) {}
+}
+export class MainActionDeleteProduct implements Action {
+    readonly type = MainActionTypes.MainActionDeleteProduct;
+    constructor(public id: number) {}
+}
+
+
 export type MainActions = 
     | MainActionAddProduct
     | MainActionAddProductSuccess
     | MainActionAddProductFailed
+    | MainActionCreateProduct
+    | MainActionUpdateProduct
+    | MainActionDeleteProduct

@@ -2,9 +2,13 @@ import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angula
 import {NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
 
 import * as $ from 'jquery';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import * as MainActions from '../state/main.action';
-
+import * as fromMainReducerState from '../state/main.selector';
+import { takeWhile, delay, tap, map } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { element } from 'protractor';
+import { Product } from '../model';
 
 
 @Component({
@@ -16,31 +20,45 @@ import * as MainActions from '../state/main.action';
 export class HomeComponent implements OnInit, AfterViewInit {
   showNavigationArrows = false;
   showNavigationIndicators = false;
-  images = ['assets/images/bg_1.png', 'assets/images/bg_2.png']
+  images = ['assets/images/bg_1.png', 'assets/images/bg_2.png'];
 
-  newShoesArrivalImages = [{
+  componentActive = true;
+
+  subcribtion: Subscription;
+
+  cartList = [];
+
+  newShoesArrivalImages: Product[] = [{
+    id: 1,
     name: 'NMD_R1 SHOES',
     type: 'LIFESTYLE',
     image:'assets/images/product-1.png',
-    price: '$120.00'
+    price: 120,
+    quantity: 1
   },
   {
+    id: 2,
     name: 'NMD_R2 SHOES',
     type: 'LIFESTYLE',
     image:'assets/images/product-2.png',
-    price: '$100.00'
+    price: 100,
+    quantity: 1
   },
   {
+    id: 3,
     name: 'NMD_R3 SHOES',
     type: 'LIFESTYLE',
     image:'assets/images/product-3.png',
-    price: '$90.00'
+    price: 90,
+    quantity: 1
   },
   {
+    id: 4,
     name: 'NMD_R4 SHOES',
     type: 'LIFESTYLE',
     image:'assets/images/product-4.png',
-    price: '$80.00'
+    price: 80,
+    quantity: 1
   }
 ]
   constructor(config: NgbCarouselConfig, 
@@ -92,15 +110,36 @@ export class HomeComponent implements OnInit, AfterViewInit {
   
   
   ngOnInit() {
+    this.store.pipe(select(fromMainReducerState.getProduct)).subscribe(product => {
+      console.log('product', product);
+      this.cartList = Object.values(product);
+      console.log('peopleArray', this.cartList);
+      // this.cartList = [];
+      // this.cartList.push(product);
+      // // this.cartList = product;
+      // console.log('cart', this.cartList);
+    })
   }
 
   ngAfterViewInit() {
-    this.countdown('10/03/2019 03:14:07 AM')
+    this.countdown('10/03/2019 03:14:07 AM');
   }
 
   addToCart(item) {
-    console.log(item);
-    this.store.dispatch(new MainActions.MainActionAddProduct(item))
+    if (this.cartList.length == 0) {
+      console.log('case 1');
+      this.store.dispatch(new MainActions.MainActionCreateProduct(item));
+    }
+    else {
+      this.cartList.forEach(elm => {
+        if (elm.id == item.id) {
+          // item.quantity = elm.quantity + 1;
+          console.log('item after 2', item);
+          this.store.dispatch(new MainActions.MainActionUpdateProduct(item.id, {quantity: elm.quantity + 1}));
+        } else {
+          this.store.dispatch(new MainActions.MainActionCreateProduct(item));
+        }
+    });
+    }
   }
-
 }
