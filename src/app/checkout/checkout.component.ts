@@ -3,6 +3,7 @@ import * as fromMainReducerState from '../state/main.selector';
 import * as MainActions from '../state/main.action';
 import { Store, select } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MainService } from '../service/main.service';
 
 
 @Component({
@@ -14,7 +15,8 @@ export class CheckoutComponent implements OnInit {
 
   constructor(
     private store: Store<any>,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private mainService: MainService
   ) {
     this.checkoutForm = this.formBuilder.group({
       name: ['', Validators.required],
@@ -52,6 +54,9 @@ export class CheckoutComponent implements OnInit {
       totalCart: this.totalCart
     }
     console.log('form', form);
+    this.mainService.sendProduct(form).subscribe((res) => {
+      console.log('res');
+    })
   }
   test($event) {
     console.log('$event', $event);
