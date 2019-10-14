@@ -7,3 +7,7 @@ export const getProduct = createSelector(
     getMainReducerState,
     state => state.entities
 )
+export const getTotalCart = createSelector(
+    getMainReducerState,
+    state => state.totalCart
+)

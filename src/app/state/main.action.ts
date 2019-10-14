@@ -8,7 +8,10 @@ export enum MainActionTypes{
 
     MainActionCreateProduct = '[MainAction] Create Product',
     MainActionUpdateProduct = '[MainAction] Update Product',
-    MainActionDeleteProduct = '[MainAction] Delete Product'
+    MainActionDeleteProduct = '[MainAction] Delete Product',
+    MainActionUpdateCartTotalFirst = '[MainAction] Add Cart Total 1st Time',
+    MainActionUpdateCartTotalFinal = '[MainAction] Total Cart',
+
 }
 
 export class MainActionAddProduct implements Action {
@@ -39,6 +42,14 @@ export class MainActionDeleteProduct implements Action {
     readonly type = MainActionTypes.MainActionDeleteProduct;
     constructor(public id: number) {}
 }
+export class MainActionUpdateCartTotalFirst implements Action {
+    readonly type = MainActionTypes.MainActionUpdateCartTotalFirst;
+    constructor(public id: number, public changes: Partial<Product>) {}
+}
+export class MainActionUpdateCartTotalFinal implements Action {
+    readonly type = MainActionTypes.MainActionUpdateCartTotalFinal;
+    constructor(public payload: any) {}
+}
 
 
 export type MainActions = 
@@ -48,3 +59,5 @@ export type MainActions =
     | MainActionCreateProduct
     | MainActionUpdateProduct
     | MainActionDeleteProduct
+    | MainActionUpdateCartTotalFirst
+    | MainActionUpdateCartTotalFinal

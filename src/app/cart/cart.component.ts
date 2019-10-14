@@ -11,6 +11,8 @@ import * as MainActions from '../state/main.action';
 })
 export class CartComponent implements OnInit {
   cartList = [];
+  cartTotal: number;
+  subTotal = [];
   constructor(
     private store: Store<any>
     ) {}
@@ -20,14 +22,15 @@ export class CartComponent implements OnInit {
   }
 
   getProduct() {
-    this.store.pipe(select(fromMainReducerState.getProduct)).subscribe(
-      item => {
+    this.store.pipe(select(fromMainReducerState.getProduct)).subscribe(item => {
         this.cartList = Object.values(item);
-        // console.log('cartList', this.cartList);
+        this.cartTotal = this.cartList.map(x => x.cartTotal).reduce((x, y) => {
+          return x + y;
+        },0);
+        this.store.dispatch(new MainActions.MainActionUpdateCartTotalFinal(this.cartTotal));
+        console.log('total', this.cartTotal);
       }
     )
-    // this.store.pipe(select(EventSelector.getEventInfo)).subscribe((eventInfo: EventInfo) => {
-    // });
   }
   deleteProduct(id) {
     console.log('id', id);
@@ -36,9 +39,11 @@ export class CartComponent implements OnInit {
   changeQuantity(item, event) {
     console.log('item', item);
     console.log('event', event.target.value);
-
     this.store.dispatch(new MainActions.MainActionUpdateProduct(item.id, {quantity: parseInt(event.target.value)}));
-
+    this.store.dispatch(new MainActions.MainActionUpdateCartTotalFirst(item.id, {cartTotal: item.price * parseInt(event.target.value)}));
+  }
+  sendDatatoCheckOut() {
+    alert('a');
   }
 
 }

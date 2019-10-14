@@ -9,6 +9,7 @@ export interface Product {
     image:string;
     price:number;
     quantity:number;
+    cartTotal:number;
 }
 
 export const productAdapter = createEntityAdapter<Product>();

@@ -9,6 +9,11 @@ import { takeWhile, delay, tap, map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { element } from 'protractor';
 import { Product } from '../model';
+import { MainService } from '../service/main.service';
+
+import { MESSAGE } from '../message';
+import { ToastrService } from 'ngx-toastr';
+
 
 
 @Component({
@@ -28,7 +33,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   cartList = [];
 
-  newShoesArrivalImages: Product[] = [{
+  newShoesArrivalImages = [{
     id: 1,
     name: 'NMD_R1 SHOES',
     type: 'LIFESTYLE',
@@ -62,7 +67,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 ]
   constructor(config: NgbCarouselConfig, 
-    private store: Store<any>) {
+    private store: Store<any>,
+    private mainService: MainService,
+    private toastr: ToastrService) {
     config.showNavigationArrows = true;
     config.showNavigationIndicators = true;
    }
@@ -129,17 +136,30 @@ export class HomeComponent implements OnInit, AfterViewInit {
     if (this.cartList.length == 0) {
       console.log('case 1');
       this.store.dispatch(new MainActions.MainActionCreateProduct(item));
+      this.store.dispatch(new MainActions.MainActionUpdateCartTotalFirst(item.id, {cartTotal: item.price}));
     }
     else {
       this.cartList.forEach(elm => {
         if (elm.id == item.id) {
           // item.quantity = elm.quantity + 1;
           console.log('item after 2', item);
-          this.store.dispatch(new MainActions.MainActionUpdateProduct(item.id, {quantity: elm.quantity + 1}));
+          this.store.dispatch(new MainActions.MainActionUpdateProduct(item.id, {quantity: elm.quantity + 1, cartTotal: item.price * (1 + elm.quantity)}));
         } else {
           this.store.dispatch(new MainActions.MainActionCreateProduct(item));
+          this.store.dispatch(new MainActions.MainActionUpdateCartTotalFirst(item.id, {cartTotal: item.price}));
         }
     });
     }
+    this.toastr.success('Add to cart success', 'Adidas');
+  }
+  sendData() {
+    const data = {
+      name: 'Minh'
+    };
+    alert('a');
+    this.mainService.sendProduct(data).subscribe((res) => {
+      console.log('res');
+    })
+
   }
 }
