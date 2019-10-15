@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as fromMainReducerState from '../state/main.selector';
 import * as MainActions from '../state/main.action';
+import * as $ from 'jquery';
+
 import { Store, select } from '@ngrx/store';
 @Component({
   selector: 'app-invoice',
@@ -14,13 +16,15 @@ export class InvoiceComponent implements OnInit {
   city:string;
   address:string;
   totalCart: number;
-  
+  monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]; 
+  dayNames= ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
   constructor(
     private store: Store<any>,
   ) { }
 
   ngOnInit() {
     this.getFormValue();
+    this.getCurrentTime();
   }
   getFormValue() {
     this.store.pipe(select(fromMainReducerState.getFormValue)).subscribe(formValue => {
@@ -35,4 +39,9 @@ export class InvoiceComponent implements OnInit {
     });
   }
 
+  getCurrentTime() {
+    const newDate = new Date();
+    newDate.setDate(newDate.getDate());
+    $('#Date').html(this.dayNames[newDate.getDay()] + " " + newDate.getDate() + ' ' + this.monthNames[newDate.getMonth()] + ' ' + newDate.getFullYear());
+  }
 }

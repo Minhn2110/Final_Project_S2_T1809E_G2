@@ -129,7 +129,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.countdown('10/03/2019 03:14:07 AM');
+    this.countdown('10/21/2019 03:14:07 AM');
   }
 
   addToCart(item) {
