@@ -36,6 +36,10 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
+import { MenComponent } from './men/men.component';
+import { WomenComponent } from './women/women.component';
+import { KidComponent } from './kid/kid.component';
+import { InvoiceComponent } from './invoice/invoice.component';
 
 
 @NgModule({
@@ -49,6 +53,10 @@ import { ContactComponent } from './contact/contact.component';
     ProductDetailComponent,
     AboutComponent,
     ContactComponent,
+    MenComponent,
+    WomenComponent,
+    KidComponent,
+    InvoiceComponent,
   ],
   imports: [
     BrowserModule,

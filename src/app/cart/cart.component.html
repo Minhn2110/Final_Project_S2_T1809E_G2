@@ -42,7 +42,7 @@
                                 <td class="quantity">
                                     <div class="input-group mb-3">
                                         <input type="text" name="quantity" #todo
-                                            class="quantity form-control input-number" [value]="item.quantity" min="1"
+                                            class="quantity form-control input-number" [value]="item.currentQuantity" min="1"
                                             max="100" (change)="changeQuantity(item, $event) ">
                                     </div>
                                 </td>

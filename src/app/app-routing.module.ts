@@ -7,6 +7,10 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
+import { MenComponent } from './men/men.component';
+import { WomenComponent } from './women/women.component';
+import { KidComponent } from './kid/kid.component';
+import { InvoiceComponent } from './invoice/invoice.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -15,8 +19,12 @@ const routes: Routes = [
   {path: 'product', component: ProductComponent},
   {path: 'checkout', component: CheckoutComponent},
   {path: 'product/:id', component: ProductDetailComponent},
+  {path: 'men', component: MenComponent},
+  {path: 'women', component: WomenComponent},
+  {path: 'kid', component: KidComponent}, 
   {path: 'about', component: AboutComponent},
-  {path: 'contact', component: ContactComponent}
+  {path: 'contact', component: ContactComponent},
+  {path: 'invoice', component: InvoiceComponent}
 ];
 
 @NgModule({

@@ -11,6 +11,8 @@ export enum MainActionTypes{
     MainActionDeleteProduct = '[MainAction] Delete Product',
     MainActionUpdateCartTotalFirst = '[MainAction] Add Cart Total 1st Time',
     MainActionUpdateCartTotalFinal = '[MainAction] Total Cart',
+    MainActionFormValue = '[MainAction] Form Value',
+
 
 }
 
@@ -50,6 +52,10 @@ export class MainActionUpdateCartTotalFinal implements Action {
     readonly type = MainActionTypes.MainActionUpdateCartTotalFinal;
     constructor(public payload: any) {}
 }
+export class MainActionFormValue implements Action {
+    readonly type = MainActionTypes.MainActionFormValue;
+    constructor(public payload: any) {}
+}
 
 
 export type MainActions = 
@@ -61,3 +67,4 @@ export type MainActions =
     | MainActionDeleteProduct
     | MainActionUpdateCartTotalFirst
     | MainActionUpdateCartTotalFinal
+    | MainActionFormValue

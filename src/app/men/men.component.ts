@@ -7,13 +7,13 @@ import { Store, select } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
 
 
-
 @Component({
-  selector: 'app-product',
-  templateUrl: './product.component.html',
-  styleUrls: ['./product.component.scss']
+  selector: 'app-men',
+  templateUrl: './men.component.html',
+  styleUrls: ['./men.component.scss']
 })
-export class ProductComponent implements OnInit {
+export class MenComponent implements OnInit {
+
   config: any;
   collection = { count: 60, data: [] };
   searchText: any;
@@ -25,22 +25,11 @@ export class ProductComponent implements OnInit {
     private store: Store<any>,
     private toastr: ToastrService
   ) {
-        //Create dummy data
-        // for (var i = 0; i < this.collection.count; i++) {
-        //   this.collection.data.push(
-        //     {
-        //       id: i + 1,
-        //       value: "items number " + (i + 1)
-        //     }
-        //   );
-        // }
         this.config = {
           itemsPerPage: 9,
           currentPage: 1,
           totalItems: this.productList.length
         };
-     
-
    }
 
   ngOnInit() {
@@ -58,7 +47,10 @@ export class ProductComponent implements OnInit {
   }
   getProduct() {
     this.mainService.getProduct().subscribe(product => {
-      this.productList = product.data;
+      console.log('product', product);
+      this.productList = product.data.filter(item => {
+        return item.type == 'Men';
+      });
       this.loader();
       console.log('productList', this.productList);
     });
@@ -78,7 +70,7 @@ export class ProductComponent implements OnInit {
     else {
       this.cartList.forEach(elm => {
         if (elm.id == item.id) {
-          this.store.dispatch(new MainActions.MainActionUpdateProduct(item.id, {currentQuantity: elm.currentQuantity + 1, cartTotal: item.price * (1 + elm.currentQuantity)}));
+          this.store.dispatch(new MainActions.MainActionUpdateProduct(item.id, {quantity: elm.quantity + 1, cartTotal: item.price * (1 + elm.quantity)}));
         } else {
           this.store.dispatch(new MainActions.MainActionCreateProduct(item));
           this.store.dispatch(new MainActions.MainActionUpdateCartTotalFirst(item.id, {cartTotal: item.price}));
@@ -87,4 +79,5 @@ export class ProductComponent implements OnInit {
     }
     this.toastr.success('Add to cart success', 'Adidas');
   }
+
 }

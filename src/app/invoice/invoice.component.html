@@ -1,0 +1,80 @@
+
+<div class="container" style="margin-top: 60px;">
+    <div class="row">
+        <div class="col-12" style="text-align: center;">
+            <img style="width: 100px;height: 120px;"
+                src="https://cdn2.bigcommerce.com/server1500/ac84d/products/1203/images/2686/Adidas_Logo_Stack__93206.1337144792.380.380.jpg?c=2"
+                alt="" />
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12" style="text-align: center; font-size: 30px; font-weight: 300; letter-spacing: 3;">
+            TRANSACTION RECEIPT </div>
+        <div class="col-12" style="text-align: center; font-size: 16px; font-weight: 500; letter-spacing: 1;">
+            Transaction Type </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="title-section col-12" style="font-size: 16px; letter-spacing: 1; border-bottom: 2px #666666 solid; padding-bottom: 10px;">
+            RECEPIENT DETAILS 
+        </div>
+        <div class="col-12 col-sm-4" style="margin-top: 20px">
+            <div style="letter-spacing: 1; font-weight: 300; padding: 10px 0;"> Name </div>
+            <div style="font-size: 22px; "> {{this.name}} </div>
+        </div>
+        <div class="col-12 col-sm-4" style="margin-top: 20px; text-align: center;">
+            <div style="letter-spacing: 1; font-weight: 300; padding: 10px 0;"> Phone </div>
+            <div style="font-size: 22px; "> {{this.phone}} </div>
+        </div>
+        <div class="col-12 col-sm-4" style="margin-top: 20px; text-align: right;">
+            <div style="letter-spacing: 1; font-weight: 300; padding: 10px 0;"> Email </div>
+            <div style="font-size: 22px; "> {{this.email}} </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="title-section col-12"
+            style="font-size: 16px; letter-spacing: 1; border-bottom: 2px #666666 solid; padding-bottom: 10px; margin-top: 20px">
+            TRANSACTION DETAILS </div>
+        <div class="col-md-6 col-xs-6" style="margin-top: 20px">
+            <div style="letter-spacing: 1; font-weight: 300; padding: 10px 0;"> DATE & HOUR </div>
+            <div style="font-size: 22px; "> 23 Jan 2016 at 16:21 </div>
+        </div>
+        <div class="col-md-6 col-xs-6" style="text-align: right;">
+            <div style="letter-spacing: 1; font-weight: 300; padding: 10px 0;"> REFERENCE </div>
+            <div style="font-size: 22px;"> Birthday Gift </div>
+        </div>
+        <hr>
+        <hr style="border-top: 1px solid #666666;">
+        <div class="col-md-6 col-xs-6" style="margin-top: 20px">
+            <div style="letter-spacing: 1; font-weight: 300; padding: 10px 0;"> CITY </div>
+            <div style="font-size: 22px; "> {{this.city}} </div>
+        </div>
+        <div class="col-md-6 col-xs-6" style="text-align: right;">
+            <div style="letter-spacing: 1; font-weight: 300; padding: 10px 0;"> STREET ADDRESS</div>
+            <div style="font-size: 22px;"> {{this.address}} </div>
+        </div>
+        <hr>
+        <hr style="border-top: 1px solid #666666;">
+        <div class="col-md-6 col-xs-6" style="margin-top: 20px">
+            <div style="letter-spacing: 1; font-weight: 300; padding: 10px 0;"> TRANSACTION AMOUNT </div>
+            <div style="font-size: 22px;"> {{this.totalCart}} $</div>
+        </div>
+        <div class="col-md-6 col-xs-6" style="text-align: right;">
+            <div style="letter-spacing: 1; font-weight: 300; padding: 10px 0;"> FEES </div>
+            <div style="font-size: 22px;"> 0.00 $ </div>
+        </div>
+        <hr>
+        <hr style="border-top: 1px solid #666666;">
+        <div class="col-12" style="text-align: center; padding-bottom: 8%">
+            <button class="btn btn-primary" onClick="window.print()" style="width:150px; padding-bottom: 16px 24px">Print</button>
+        </div>
+    </div>
+</div>

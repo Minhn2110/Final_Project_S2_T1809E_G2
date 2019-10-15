@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.store.pipe(select(fromMainReducerState.getProduct)).subscribe(item => {
       this.cartList = Object.values(item);
-      this.cartQuantity = this.cartList.map(x => x.quantity).reduce((x, y) => {
+      this.cartQuantity = this.cartList.map(x => x.currentQuantity).reduce((x, y) => {
         return x + y;
       },0);
     });

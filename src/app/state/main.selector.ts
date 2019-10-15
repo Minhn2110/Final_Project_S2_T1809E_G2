@@ -11,3 +11,7 @@ export const getTotalCart = createSelector(
     getMainReducerState,
     state => state.totalCart
 )
+export const getFormValue = createSelector(
+    getMainReducerState,
+    state => state.formValue
+)

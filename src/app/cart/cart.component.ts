@@ -39,7 +39,7 @@ export class CartComponent implements OnInit {
   changeQuantity(item, event) {
     console.log('item', item);
     console.log('event', event.target.value);
-    this.store.dispatch(new MainActions.MainActionUpdateProduct(item.id, {quantity: parseInt(event.target.value)}));
+    this.store.dispatch(new MainActions.MainActionUpdateProduct(item.id, {currentQuantity: parseInt(event.target.value)}));
     this.store.dispatch(new MainActions.MainActionUpdateCartTotalFirst(item.id, {cartTotal: item.price * parseInt(event.target.value)}));
   }
   sendDatatoCheckOut() {

@@ -4,7 +4,8 @@ import * as MainActions from '../state/main.action';
 import { Store, select } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MainService } from '../service/main.service';
-
+import { RouterModule, Router } from '@angular/router';
+// import {AppRoutingModule} from '../app-routing.module';
 
 @Component({
   selector: 'app-checkout',
@@ -16,7 +17,8 @@ export class CheckoutComponent implements OnInit {
   constructor(
     private store: Store<any>,
     private formBuilder: FormBuilder,
-    private mainService: MainService
+    private mainService: MainService,
+    private router: Router
   ) {
     this.checkoutForm = this.formBuilder.group({
       name: ['', Validators.required],
@@ -53,9 +55,14 @@ export class CheckoutComponent implements OnInit {
       item: this.cartList,
       totalCart: this.totalCart
     }
+    this.store.dispatch(new MainActions.MainActionFormValue(form));
+    this.router.navigate(['/invoice']);
+
     console.log('form', form);
     this.mainService.sendProduct(form).subscribe((res) => {
-      console.log('res');
+      console.log('res', res);
+      if (res) {
+      }
     })
   }
   test($event) {

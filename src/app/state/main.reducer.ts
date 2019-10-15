@@ -25,6 +25,11 @@ export function mainReducer(state = initialState, action: MainActions) {
                     ...state,
                     totalCart: action.payload
                 }
+            case MainActionTypes.MainActionFormValue:
+                return {
+                    ...state,
+                    formValue: action.payload
+                }
         default:
             return state;
     }
