@@ -1,6 +1,19 @@
 
 ::ng-deep {
     .ngx-pagination {
-        padding-left: 0 !important;
-    }
+        padding-left: 0px !important;
+      }
+      
+      .ngx-pagination .current,
+      .btn-info {
+        background: black !important;
+        border: transparent !important;
+        border-radius: 20px !important;
+      }
+      
+      .ngx-pagination .current:hover {
+        background: black !important;
+        border-radius: 20px !important; 
+        border: transparent !important;
+}
 }
