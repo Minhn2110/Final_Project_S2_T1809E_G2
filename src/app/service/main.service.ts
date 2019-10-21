@@ -15,4 +15,7 @@ export class MainService {
   sendProduct(data): Observable<any> {
     return this.http.post<any>('https://lit-ravine-56602.herokuapp.com/api/product', data);
   }
+  sendContact(data): Observable<any> {
+    return this.http.post<any>('https://lit-ravine-56602.herokuapp.com/api/contact', data);
+  }
 }

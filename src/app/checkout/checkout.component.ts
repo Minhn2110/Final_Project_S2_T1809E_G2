@@ -13,7 +13,9 @@ import { RouterModule, Router } from '@angular/router';
   styleUrls: ['./checkout.component.scss']
 })
 export class CheckoutComponent implements OnInit {
-
+  totalCart: number;
+  cartList = [];
+  checkoutForm: any;
   constructor(
     private store: Store<any>,
     private formBuilder: FormBuilder,
@@ -30,9 +32,7 @@ export class CheckoutComponent implements OnInit {
     });
    }
 
-  totalCart: number;
-  cartList = [];
-  checkoutForm: any;
+
   ngOnInit() {
     this.getProduct();
   }
