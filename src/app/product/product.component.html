@@ -44,7 +44,7 @@
                                 <div class="panel panel-default">
                                     <div class="panel-heading" role="tab" id="headingThree">
                                         <h4 class="panel-title">
-                                            <a class="collapsed">Kid</a>
+                                            <a class="collapsed" routerLink="/kid">Kid</a>
                                         </h4>
                                     </div>
                                 </div>
@@ -63,6 +63,11 @@
                                 </div>
                             </div>
                         </form>
+                    </div>
+                    <div id="price">
+                        <h2 class="heading">Price: {{rangeValues[0] + '$' + ' - ' + rangeValues[1] + '$'}}</h2>
+                        <p-slider [(ngModel)]="rangeValues" (click)="handleChange($event)" [min]="0" [max]="300"
+                            [style]="{'width':'100%'}" [range]="true"></p-slider>
                     </div>
                 </div>
             </div>

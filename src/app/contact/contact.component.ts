@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MainService } from '../service/main.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-contact',
@@ -9,10 +10,12 @@ import { MainService } from '../service/main.service';
 })
 export class ContactComponent implements OnInit {
   contactForm: any;
+  submitted = false;
 
 
   constructor(private formBuilder: FormBuilder,
-    private mainService: MainService) { }
+    private mainService: MainService,
+    private toastr: ToastrService) { }
 
   ngOnInit() {
     this.contactForm = this.formBuilder.group({
@@ -22,16 +25,26 @@ export class ContactComponent implements OnInit {
       message: ['', Validators.required],
     });
   }
-  submitContactForm() {
-    const contactFormValue = {
-      formValue: this.contactForm.value
-    }
-    this.mainService.sendContact(contactFormValue).subscribe((res) => {
-      console.log('res', res);
-      if (res) {
-      }
-    })
-    console.log('contactFormValue', contactFormValue)
-  }
+  get f() { return this.contactForm.controls; }
 
+  submitContactForm() {
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.contactForm.invalid) {
+        return;
+    } else {
+      const contactFormValue = {
+        formValue: this.contactForm.value
+      }
+      this.mainService.sendContact(contactFormValue).subscribe(res => {
+        console.log('res', res);
+        console.log('contactFormValue', contactFormValue)
+        if (res) {
+          this.toastr.success('Message send successfully', 'Adidas');
+          this.contactForm.reset();
+        }
+      });
+    }
+  }
 }

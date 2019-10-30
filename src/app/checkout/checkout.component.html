@@ -20,45 +20,62 @@
                     <h3 class="mb-4 billing-heading">Billing Details</h3>
                     <div class="row align-items-end">
                         <div class="col-md-6">
-                            <div class="form-group">
+                            <div class="form-group form-wrapper">
                                 <label for="name">Name</label>
-                                <input type="text" class="form-control" formControlName="name" placeholder="Name">
+                                <input type="text" class="form-control" formControlName="name" placeholder="Name"
+                                    [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+                                <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                                    <div *ngIf="f.name.errors.required">Your Name is required</div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group">
+                            <div class="form-group form-wrapper">
                                 <label for="phone">Phone</label>
-                                <input type="text" class="form-control" formControlName="phone" placeholder="Phone">
+                                <input type="text" class="form-control" formControlName="phone" placeholder="Phone"
+                                    [ngClass]="{ 'is-invalid': submitted && f.phone.errors }">
+                                <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+                                    <div *ngIf="f.phone.errors.required">Your Phone is required</div>
+                                </div>
                             </div>
                         </div>
                         <div class="w-100"></div>
                         <div class="col-md-12">
-                            <div class="form-group">
+                            <div class="form-group form-wrapper">
                                 <label for="city">City</label>
                                 <div class="select-wrap">
                                     <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                    <select name="" id="" class="form-control" formControlName="city">
+                                    <select class="form-control" formControlName="city">
                                         <option value="France">France</option>
-                                        <option value="">Italy</option>
-                                        <option value="">Philippines</option>
-                                        <option value="">South Korea</option>
-                                        <option value="">Hongkong</option>
-                                        <option value="">Japan</option>
+                                        <option value="Italy">Italy</option>
+                                        <option value="Philippines">Philippines</option>
+                                        <option value="SouthKorea">SouthKorea</option>
+                                        <option value="Hongkong">Hongkong</option>
+                                        <option value="Japan">Japan</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                         <div class="w-100"></div>
                         <div class="col-md-6">
-                            <div class="form-group">
+                            <div class="form-group form-wrapper">
                                 <label for="streetAddress">Street Address</label>
-                                <input type="text" class="form-control" formControlName="streetAddress" placeholder="House number and street name">
+                                <input type="text" class="form-control" formControlName="streetAddress"
+                                    placeholder="House number and street name"
+                                    [ngClass]="{ 'is-invalid': submitted && f.streetAddress.errors }">
+                                <div *ngIf="submitted && f.streetAddress.errors" class="invalid-feedback">
+                                    <div *ngIf="f.streetAddress.errors.required">Your Phone is required</div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group">
+                            <div class="form-group form-wrapper">
                                 <label for="email">Email</label>
-                                <input type="text" class="form-control" placeholder="" formControlName="email">
+                                <input type="text" class="form-control" placeholder="Email" formControlName="email"
+                                    [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                    <div *ngIf="f.email.errors.required">Your Phone is required</div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -82,7 +99,8 @@
                                 <div class="form-group">
                                     <div class="col-md-12">
                                         <div class="radio">
-                                            <label><input type="radio" class="mr-2" value="Direct Bank Tranfer" formControlName="paymentMethod"> Direct Bank
+                                            <label><input type="radio" class="mr-2" value="Direct Bank Tranfer"
+                                                    formControlName="paymentMethod"> Direct Bank
                                                 Tranfer</label>
                                         </div>
                                     </div>
@@ -90,14 +108,16 @@
                                 <div class="form-group">
                                     <div class="col-md-12">
                                         <div class="radio">
-                                            <label><input type="radio" class="mr-2" value="COD" formControlName="paymentMethod"> COD</label>
+                                            <label><input type="radio" class="mr-2" value="COD"
+                                                    formControlName="paymentMethod"> COD</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-md-12">
                                         <div class="radio">
-                                            <label><input type="radio" class="mr-2" value="Paypal" formControlName="paymentMethod"> Paypal</label>
+                                            <label><input type="radio" class="mr-2" value="Paypal"
+                                                    formControlName="paymentMethod"> Paypal</label>
                                         </div>
                                     </div>
                                 </div>

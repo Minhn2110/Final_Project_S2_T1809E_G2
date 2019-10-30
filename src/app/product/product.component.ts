@@ -16,10 +16,15 @@ import { ToastrService } from 'ngx-toastr';
 export class ProductComponent implements OnInit {
   config: any;
   collection = { count: 60, data: [] };
+  rangeValues: number[] = [0, 300];
+
   searchText: any;
   productList = [];
+  middleProductList = [];
 
   cartList = [];
+
+  package: any;
   constructor(
     private mainService: MainService,
     private store: Store<any>,
@@ -47,7 +52,7 @@ export class ProductComponent implements OnInit {
     this.getProduct();
     this.store.pipe(select(fromMainReducerState.getProduct)).subscribe(product => {
       this.cartList = Object.values(product);
-    })
+    });
   }
 
 
@@ -59,6 +64,7 @@ export class ProductComponent implements OnInit {
   getProduct() {
     this.mainService.getProduct().subscribe(product => {
       this.productList = product.data;
+      this.middleProductList = JSON.parse(JSON.stringify(product.data));
       this.loader();
       console.log('productList', this.productList);
     });
@@ -86,5 +92,15 @@ export class ProductComponent implements OnInit {
     });
     }
     this.toastr.success('Add to cart success', 'Adidas');
+  }
+  handleChange(e) {
+    console.log('e', e);
+    console.log('rangeValues', this.rangeValues);
+    this.ApplyFilters();
+  }
+  ApplyFilters() {
+    this.productList = this.middleProductList.filter(item => {
+      return (item.price >= this.rangeValues[0] && item.price <= this.rangeValues[1])
+    });
   }
 }

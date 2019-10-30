@@ -42,8 +42,4 @@ export class CartComponent implements OnInit {
     this.store.dispatch(new MainActions.MainActionUpdateProduct(item.id, {currentQuantity: parseInt(event.target.value)}));
     this.store.dispatch(new MainActions.MainActionUpdateCartTotalFirst(item.id, {cartTotal: item.price * parseInt(event.target.value)}));
   }
-  sendDatatoCheckOut() {
-    alert('a');
-  }
-
 }

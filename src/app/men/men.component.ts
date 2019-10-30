@@ -18,7 +18,8 @@ export class MenComponent implements OnInit {
   collection = { count: 60, data: [] };
   searchText: any;
   productList = [];
-
+  rangeValues: number[] = [0, 300];
+  middleProductList = [];
   cartList = [];
   constructor(
     private mainService: MainService,
@@ -49,8 +50,11 @@ export class MenComponent implements OnInit {
     this.mainService.getProduct().subscribe(product => {
       console.log('product', product);
       this.productList = product.data.filter(item => {
-        return item.type == 'Men';
-      });
+        return item.type == 'Men'
+      })
+      this.middleProductList = JSON.parse(JSON.stringify(product.data.filter(item => {
+        return item.type == 'Men'
+      })));
       this.loader();
       console.log('productList', this.productList);
     });
@@ -78,6 +82,16 @@ export class MenComponent implements OnInit {
     });
     }
     this.toastr.success('Add to cart success', 'Adidas');
+  }
+  handleChange(e) {
+    console.log('e', e);
+    console.log('rangeValues', this.rangeValues);
+    this.ApplyFilters();
+  }
+  ApplyFilters() {
+    this.productList = this.middleProductList.filter(item => {
+      return (item.price >= this.rangeValues[0] && item.price <= this.rangeValues[1])
+    });
   }
 
 }

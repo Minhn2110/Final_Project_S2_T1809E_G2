@@ -60,16 +60,16 @@ export class ProductDetailComponent implements OnInit {
   };
   addToCart(item) {
     if (this.cartList.length == 0) {
-      console.log('case 1');
       this.store.dispatch(new MainActions.MainActionCreateProduct(item));
+      this.store.dispatch(new MainActions.MainActionUpdateCartTotalFirst(item.id, {cartTotal: item.price}));
     }
     else {
       this.cartList.forEach(elm => {
         if (elm.id == item.id) {
-          console.log('item after 2', item);
-          this.store.dispatch(new MainActions.MainActionUpdateProduct(item.id, {quantity: elm.quantity + 1}));
+          this.store.dispatch(new MainActions.MainActionUpdateProduct(item.id, {currentQuantity: elm.currentQuantity + 1, cartTotal: item.price * (1 + elm.currentQuantity)}));
         } else {
           this.store.dispatch(new MainActions.MainActionCreateProduct(item));
+          this.store.dispatch(new MainActions.MainActionUpdateCartTotalFirst(item.id, {cartTotal: item.price}));
         }
     });
     }
