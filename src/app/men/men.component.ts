@@ -74,7 +74,7 @@ export class MenComponent implements OnInit {
     else {
       this.cartList.forEach(elm => {
         if (elm.id == item.id) {
-          this.store.dispatch(new MainActions.MainActionUpdateProduct(item.id, {quantity: elm.quantity + 1, cartTotal: item.price * (1 + elm.quantity)}));
+          this.store.dispatch(new MainActions.MainActionUpdateProduct(item.id, {currentQuantity: elm.currentQuantity + 1, cartTotal: item.price * (1 + elm.currentQuantity)}));
         } else {
           this.store.dispatch(new MainActions.MainActionCreateProduct(item));
           this.store.dispatch(new MainActions.MainActionUpdateCartTotalFirst(item.id, {cartTotal: item.price}));
