@@ -32,40 +32,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   subcribtion: Subscription;
 
   cartList = [];
+  productList = [];
 
-  newShoesArrivalImages = [{
-    id: 1,
-    name: 'NMD_R1 SHOES',
-    type: 'LIFESTYLE',
-    image:'assets/images/product-1.png',
-    price: 120,
-    quantity: 1
-  },
-  {
-    id: 2,
-    name: 'NMD_R2 SHOES',
-    type: 'LIFESTYLE',
-    image:'assets/images/product-2.png',
-    price: 100,
-    quantity: 1
-  },
-  {
-    id: 3,
-    name: 'NMD_R3 SHOES',
-    type: 'LIFESTYLE',
-    image:'assets/images/product-3.png',
-    price: 90,
-    quantity: 1
-  },
-  {
-    id: 4,
-    name: 'NMD_R4 SHOES',
-    type: 'LIFESTYLE',
-    image:'assets/images/product-4.png',
-    price: 80,
-    quantity: 1
-  }
-]
   constructor(config: NgbCarouselConfig, 
     private store: Store<any>,
     private mainService: MainService,
@@ -117,6 +85,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   
   
   ngOnInit() {
+    this.getProduct();
     this.store.pipe(select(fromMainReducerState.getProduct)).subscribe(product => {
       console.log('product', product);
       this.cartList = Object.values(product);
@@ -129,21 +98,18 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.countdown('10/21/2019 03:14:07 AM');
+    this.countdown('11/31/2019 03:14:07 AM');
   }
 
   addToCart(item) {
     if (this.cartList.length == 0) {
-      console.log('case 1');
       this.store.dispatch(new MainActions.MainActionCreateProduct(item));
       this.store.dispatch(new MainActions.MainActionUpdateCartTotalFirst(item.id, {cartTotal: item.price}));
     }
     else {
       this.cartList.forEach(elm => {
         if (elm.id == item.id) {
-          // item.quantity = elm.quantity + 1;
-          console.log('item after 2', item);
-          this.store.dispatch(new MainActions.MainActionUpdateProduct(item.id, {quantity: elm.quantity + 1, cartTotal: item.price * (1 + elm.quantity)}));
+          this.store.dispatch(new MainActions.MainActionUpdateProduct(item.id, {currentQuantity: elm.currentQuantity + 1, cartTotal: item.price * (1 + elm.currentQuantity)}));
         } else {
           this.store.dispatch(new MainActions.MainActionCreateProduct(item));
           this.store.dispatch(new MainActions.MainActionUpdateCartTotalFirst(item.id, {cartTotal: item.price}));
@@ -152,14 +118,19 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
     this.toastr.success('Add to cart success', 'Adidas');
   }
-  sendData() {
-    const data = {
-      name: 'Minh'
-    };
-    alert('a');
-    this.mainService.sendProduct(data).subscribe((res) => {
-      console.log('res');
-    })
-
+  getProduct() {
+    this.mainService.getProduct().subscribe(product => {
+      this.loader();
+      this.productList = product.data.slice(Math.max(product.data.length - 8, 1));
+      // this.middleProductList = JSON.parse(JSON.stringify(product.data));
+      // console.log('productLista', this.productList.slice(Math.max(this.productList.length - 5, 1)));
+    });
   }
+  loader() {
+		setTimeout(function() { 
+			if($('#ftco-loader').length > 0) {
+				$('#ftco-loader').removeClass('show');
+			}
+		}, 1);
+  };
 }
